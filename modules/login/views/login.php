@@ -1,4 +1,4 @@
-<?php echo form_open('/login/');?>
+<?php echo form_open("login");?>
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="username" name="username">
           <div class="input-group-append">
