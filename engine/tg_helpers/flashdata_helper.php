@@ -3,6 +3,22 @@ function set_flashdata($msg) {
     $_SESSION['flashdata'] = $msg;
 }
 
+function get_flashdata():array|string|null
+{
+    if (isset($_SESSION['flashdata'])) {
+
+        $data = $_SESSION['flashdata'];
+
+        unset($_SESSION['flashdata']);
+
+        return $data;
+
+    }
+
+    return null;
+}
+
+
 function flashdata($opening_html=null, $closing_html=null) {
 
     if (isset($_SESSION['flashdata'])) {

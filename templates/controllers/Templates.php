@@ -1,8 +1,14 @@
 <?php
 class Templates extends Trongate {
+
+    function dashboard($data){
+        load('dashboard',$data);
+    }
+
     function login($data){
         load('login',$data);
     }
+
     function public($data) {
         load('public', $data);
     }
