@@ -1,5 +1,12 @@
 <?php
 class Dashboard extends Trongate{
+
+    protected array $adminOnly = [1];
+    protected array $everyone = [1,2,3,4,5];
+    protected array $adminAndManger = [1,2,3];
+
+    protected array $managerOnly = [2];
+
     function __construct(){
 
         parent::__construct('dashboard');
@@ -57,27 +64,23 @@ class Dashboard extends Trongate{
         }
     }
 
-    function addproduct(){
-        $this->_make_sure_allowed([1,2]);
-
-        echo "You are allowed to add a product";
-
-    }
-
-    function deleteproduct(){
-        $this->_make_sure_allowed(1);
-
-        echo "You are allowed to delete a product";
-
-    }
-
-    function products($action){
+    function products($action, $id = null){
 
         $this->module('products');
 
-        return match($action){
-            'list' => $this->products->list()
-        };
+        switch($action){
+            case "list":
+                $this->products->list();
+                break;
+
+            case "add":
+                $this->_make_sure_allowed($this->everyone);
+                $this->products->add();
+                break;
+
+
+        }
+        
 
     }
 

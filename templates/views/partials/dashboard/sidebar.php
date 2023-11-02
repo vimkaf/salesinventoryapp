@@ -3,7 +3,7 @@
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
         <li class="nav-item">
-            <a href="<?= BASE_URL; ?>" class="nav-link <?= segment(1) === 'dashboard' ? 'active' : '' ?>">
+            <a href="<?= BASE_URL. '/dashboard'; ?>" class="nav-link <?= segment(1) === 'dashboard' && segment(2) == "" ? 'active' : '' ?>">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                     Dashboard
@@ -13,7 +13,7 @@
 
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link <?= segment(1) === 'products' ? 'active' : '' ?>">
+            <a href="#" class="nav-link <?= segment(2) === 'products' ? 'active' : '' ?>">
                 <i class="nav-icon fas fa-shopping-bag"></i>
                 <p>
                     Products
@@ -28,7 +28,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/dashboard/products/add" class="nav-link">
+                    <a href="/dashboard/products/add" class="nav-link  <?= segment(2) === 'products' ? 'active' : '' ?>">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Add Product</p>
                     </a>

@@ -2,32 +2,18 @@
 
 class Products extends Trongate{
 
-    function _make_sure_allowed(int|array $userLevels = null){
-        $this->module('trongate_tokens');
+    function list(){
 
-        $token = $this->trongate_tokens->_attempt_get_valid_token($userLevels);
-
-        if($token === false){
-            set_flashdata([
-                'type' => 'warning',
-                'message' => 'You are not allowed to peform that action'
-            ]);
-
-            redirect('/dashboard');
-        }
-        else{
-            return $token;
-        }
+        echo "Products list should appeare here";
     }
 
     function add(){
-        $this->view('add_product');
-    }
+    
+        $data['page_title'] = "Add Product";
+        $data['view_file'] = 'add_product';
+        $data['view_module'] = 'products';
 
-    function list(){
-        $this->_make_sure_allowed(2);
-
-        echo "Products list should appeare here";
+        $this->template('dashboard', $data);
     }
     function list_product(){
         $this->view('list_products');

@@ -23,7 +23,6 @@
   <div class="content-wrapper">
     
     <!-- Content Header (Page header) -->
-    <?= Template::partial('partials/dashboard/contentheader') ?>
     <!-- /.content-header -->
 
     <!-- Main content -->
