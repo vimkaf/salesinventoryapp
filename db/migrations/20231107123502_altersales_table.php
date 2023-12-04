@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-use Phinx\Console\Command\Create;
 use Phinx\Migration\AbstractMigration;
 
-final class CreateInventoryTransactionsTable extends AbstractMigration
+final class AltersalesTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -20,14 +19,8 @@ final class CreateInventoryTransactionsTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('inventory_transactions',['id'=>'transaction_id']);
-        $table->addColumn('inventory_id','integer');
-        $table->addColumn('transaction_type','string');
-        $table->addColumn('quantity','integer');
-        $table->addColumn('transaction_date','date');
+        $table = $this->table('sales');
         $table->addColumn('employee_id','integer');
-        $table->addColumn('remarks','text',['null'=>true]);
-        $table->addColumn('reference_id','string');
-        $table->Create();
+        $table->update();
     }
 }

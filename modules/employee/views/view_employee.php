@@ -2,12 +2,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">List Product</h1>
+                <h1 class="m-0">View Employee</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="<?= BASE_URL."/" ?>">Dashboard</a></li>
-                    <li class="breadcrumb-item active">List Product</li>
+                    <li class="breadcrumb-item active">View Employee</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -41,29 +41,29 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Product Name</th>
-                      <th>Product Price</th>
-                      <th>Product Code</th>
-                      <th>category</th>
-                      <th>Brand</th>
-                      <th>Model</th>
-                      <th>Unit</th>
+                      <th>Fist Name</th>
+                      <th>Last Name</th>
+                      <th>Email</th>
+                      <th>Phone No</th>
+                      <th>Role</th>
+                      <th>Member_id</th>
+                      <th>Trongate_user_id</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php $id=1; ?>
-                    <?php foreach($products as $product):?>
+                    <?php foreach($employees as $employee):?>
                       <tr>
                         <td><?= $id.'.'?></td>
-                        <td><?= $product->product_name;?></td>
-                        <td><?= $product->product_price;?></td>
-                        <td><?= $product->product_code;?></td>
-                        <td><?= $product->category_name; ?></td>
-                        <td><?= $product->brand;?></td>
-                        <td><?= $product->model;?></td>
-                        <td><?= $product->unit;?></td>
-                        <td><a href="/dashboard/products/edit/<?= $product->product_id;?>">Edit</a></td>
-                        <td><a href="/dashboard/products/delete/<?= $product->product_id;?>">Delete</a></td>
+                        <td><?= $employee->first_name;?></td>
+                        <td><?= $employee->last_name;?></td>
+                        <td><?= $employee->email;?></td>
+                        <td><?= $employee->phone_number; ?></td>
+                        <td><?= $employee->role;?></td>
+                        <td><?= $employee->member_id;?></td>
+                        <td><?= $employee->trongate_user_id;?></td>
+                        <td><a href="/dashboard/products/edit/<?= $employee->employee_id;?>">Edit</a></td>
+                        <td><a href="/dashboard/products/delete/<?= $employee->employee_id;?>">Delete</a></td>
                       </tr>
                       <?php $id++;?>
                       

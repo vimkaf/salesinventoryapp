@@ -2,12 +2,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">List Product</h1>
+                <h1 class="m-0">List Warehouse</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="<?= BASE_URL."/" ?>">Dashboard</a></li>
-                    <li class="breadcrumb-item active">List Product</li>
+                    <li class="breadcrumb-item active">List Warehouse</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -41,32 +41,25 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Product Name</th>
-                      <th>Product Price</th>
-                      <th>Product Code</th>
-                      <th>category</th>
-                      <th>Brand</th>
-                      <th>Model</th>
-                      <th>Unit</th>
+                      <th>Warehouse Name</th>
+                      <th>Warehouse Code</th>
+                      <th>Warehouse Location</th>
+                      <th>Warehouse Adress</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php $id=1; ?>
-                    <?php foreach($products as $product):?>
+                    <?php foreach($warehouses as $warehouse):?>
                       <tr>
                         <td><?= $id.'.'?></td>
-                        <td><?= $product->product_name;?></td>
-                        <td><?= $product->product_price;?></td>
-                        <td><?= $product->product_code;?></td>
-                        <td><?= $product->category_name; ?></td>
-                        <td><?= $product->brand;?></td>
-                        <td><?= $product->model;?></td>
-                        <td><?= $product->unit;?></td>
-                        <td><a href="/dashboard/products/edit/<?= $product->product_id;?>">Edit</a></td>
-                        <td><a href="/dashboard/products/delete/<?= $product->product_id;?>">Delete</a></td>
+                        <td><?= $warehouse->warehouse_name;?></td>
+                        <td><?= $warehouse->warehouse_code;?></td>
+                        <td><?= $warehouse->warehouse_location;?></td>
+                        <td><?= $warehouse->warehouse_address; ?></td>
+                        <td><a href="/dashboard/warehouse/edit/<?= $warehouse->warehouse_id;?>">Edit</a></td>
+                        <td><a href="/dashboard/warehouse/delete/<?= $warehouse->warehouse_id;?>">Delete</a></td>
                       </tr>
                       <?php $id++;?>
-                      
                     <?php endforeach;?>
                   </tbody>
                 </table>

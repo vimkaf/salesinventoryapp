@@ -26,8 +26,8 @@
           <!-- <img src="<?= BASE_URL; ?>/assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> -->
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
-          <span class="badge bg-red">Administrator</span>
+          <a href="#" class="d-block"><?= ucwords($_SESSION['employee']->first_name. " ". $_SESSION['employee']->last_name); ?></a>
+          <span class="badge bg-red"><?= ucfirst($_SESSION['employee']->role); ?></span>
         </div>
       </div>
 

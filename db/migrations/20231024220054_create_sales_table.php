@@ -21,12 +21,12 @@ final class CreateSalesTable extends AbstractMigration
     {
         $table = $this->table('sales',['id'=>'sale_id']);
         $table->addColumn('product_id','integer');
-        $table->addColumn('quantity_sold','integer');
+        // $table->addColumn('quantity_sold','integer');
         $table->addColumn('date_of_sale','date');
         $table->addColumn('total_price','double');
         $table->addColumn('customer_id','integer');
         $table->addColumn('warehouse_id','integer');
-        $table->addColumn('price','double');
+        // $table->addColumn('price','double');
         $table->addColumn('status','string');
         $table->create();
     }

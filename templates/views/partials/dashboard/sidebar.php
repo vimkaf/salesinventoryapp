@@ -22,49 +22,60 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="/dashboard/products/list" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>List Product</p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="/dashboard/products/add" class="nav-link  <?= segment(2) === 'products' ? 'active' : '' ?>">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Add Product</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/inventory/import_product" class="nav-link">
+                    <a href="/dashboard/products/list" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>List Product</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/dashboard/products/import" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Import Product</p>
                     </a>
                 </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link <?= segment(2) === 'products' ? 'active' : '' ?>">
+                <i class="nav-icon fas fa-shopping-bag"></i>
+                <p>
+                    Inventory
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/dashboard/products/add_stocks" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Print Barcode/Label</p>
+                        <p>Add Stock</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/dashboard/products/add_adjustments" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Add Quantity</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/dashboard/products/quantity" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Quantity Adjustment</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Add Adjustments</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/inventory/stock_counts" class="nav-link">
+                    <a href="/dashboard/products/stock" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Stock Counts</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/inventory/count_strock" class="nav-link">
+                    <a href="/dashboard/products/count" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Count Stock</p>
                     </a>
@@ -81,27 +92,21 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="pages/charts/chartjs.html" class="nav-link">
+                    <a href="/dashboard/sales/add" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>ChartJS</p>
+                        <p>Add Sales</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/charts/flot.html" class="nav-link">
+                    <a href="/dashboard/sales/list" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Flot</p>
+                        <p>List Sales</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/charts/inline.html" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Inline</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/charts/uplot.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>uPlot</p>
+                        <p>POS Sales</p>
                     </a>
                 </li>
             </ul>
@@ -116,51 +121,15 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="pages/UI/general.html" class="nav-link">
+                    <a href="/document/purcheses/add" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>General</p>
+                        <p>Create Porchase Order</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="pages/UI/icons.html" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/UI/buttons.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Buttons</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/UI/sliders.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Sliders</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/UI/modals.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Modals & Alerts</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/UI/navbar.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Navbar & Tabs</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/UI/timeline.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Timeline</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/UI/ribbons.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Ribbons</p>
+                        <p>List Porchase Order</p>
                     </a>
                 </li>
             </ul>
@@ -169,33 +138,65 @@
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-edit"></i>
                 <p>
-                    Transfer
+                    Werehouses
                     <i class="fas fa-angle-left right"></i>
                 </p>
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="pages/forms/general.html" class="nav-link">
+                    <a href="/dashboard/warehouse/add" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>General Elements</p>
+                        <p>Add Warehouse</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/forms/advanced.html" class="nav-link">
+                    <a href="/dashboard/warehouse/list" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Advanced Elements</p>
+                        <p>List warehouse</p>
+                    </a>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                    Customer
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/dashboard/customer/add" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Add Customer</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/forms/editors.html" class="nav-link">
+                    <a href="/dashboard/customer/view" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Editors</p>
+                        <p>View Customers</p>
+                    </a>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                    Employees
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/dashboard/employee/add" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Add Employee</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/forms/validation.html" class="nav-link">
+                    <a href="/dashboard/employee/views" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Validation</p>
+                        <p>View Employee</p>
                     </a>
                 </li>
             </ul>
@@ -205,35 +206,6 @@
                 <i class="nav-icon fas fa-table"></i>
                 <p>
                     Returns
-                    <i class="fas fa-angle-left right"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="pages/tables/simple.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Simple Tables</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/tables/data.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>DataTables</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/tables/jsgrid.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>jsGrid</p>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
-                <p>
-                    People
                     <i class="fas fa-angle-left right"></i>
                 </p>
             </a>

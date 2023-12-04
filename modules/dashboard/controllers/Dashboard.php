@@ -1,4 +1,7 @@
 <?php
+
+use Phinx\Db\Action\Action;
+
 class Dashboard extends Trongate{
 
     protected array $adminOnly = [1];
@@ -64,12 +67,16 @@ class Dashboard extends Trongate{
         }
     }
 
-    function products($action, $id = null){
+    function products($action){
+
+        $id = segment(4);
+        $product_name = segment(5);
 
         $this->module('products');
 
         switch($action){
             case "list":
+                $this->_make_sure_allowed($this->everyone);
                 $this->products->list();
                 break;
 
@@ -77,12 +84,113 @@ class Dashboard extends Trongate{
                 $this->_make_sure_allowed($this->everyone);
                 $this->products->add();
                 break;
-
-
+            case "import":
+                $this->_make_sure_allowed($this->everyone);
+                $this->products->import();
+                break;
+            case "barcode":
+                $this->_make_sure_allowed($this->everyone);
+                $this->products->barcode();
+                break;
+            case "add_stocks":
+                $this->_make_sure_allowed($this->adminAndManger);
+                $this->products->add_stock();
+                break;
+            case "quantity":
+                $this->_make_sure_allowed($this->everyone);
+                $this->products->quantity();
+                break;
+            case "add_adjustments":
+                $this->_make_sure_allowed($this->everyone);
+                $this->products->add_adjustments();
+                break;
+            case "stock":
+                $this->_make_sure_allowed($this->everyone);
+                $this->products->stock();
+                break;
+            case "count":
+                $this->_make_sure_allowed($this->everyone);
+                $this->products->count();
+                break;               
+            case "edit":
+                $this->_make_sure_allowed($this->everyone);
+                $this->products->edit($id);
+                break;
+            case "delete":
+                $this->_make_sure_allowed($this->everyone);
+                $this->products->delete($id);
+                break;
         }
-        
-
     }
+    function sales($action, $id=null){
+        
+        $this->module('sales');
 
+        switch ($action){
+            case "add":
+                $this->_make_sure_allowed($this->everyone);
+                $this->sales->add();
+                break;
+            case "list":
+                $this->_make_sure_allowed($this->everyone);
+                $this->sales->list();
+                break;
+        }
+    }
+    function warehouse($action){
+        $id = segment(4);
+        $product_name = segment(5);
+
+        $this->module('warehouse');
+
+        switch ($action){
+            case "add":
+                $this->_make_sure_allowed($this->everyone);
+                $this->warehouse->add();
+                break;
+            case "list":
+                $this->_make_sure_allowed($this->everyone);
+                $this->warehouse->list();
+                break;
+            case "edit":
+                $this->_make_sure_allowed($this->everyone);
+                $this->warehouse->edit($id);
+                break;
+            case "delete":
+                $this->_make_sure_allowed($this->everyone);
+                $this->warehouse->delete($id);
+                break;
+        }
+    }
+    function customer($action){
+        
+        $this->module('customer');
+
+        switch ($action){
+            case "add":
+                $this->_make_sure_allowed($this->everyone);
+                $this->customer->add();
+                break;
+            case "view":
+                $this->_make_sure_allowed($this->everyone);
+                $this->customer->view();
+                break;
+        }
+    }
+    function employee($action){
+        
+        $this->module('employee');
+
+        switch ($action){
+            case "add":
+                $this->_make_sure_allowed($this->everyone);
+                $this->employee->add();
+                break;
+            case "views":
+                $this->_make_sure_allowed($this->everyone);
+                $this->employee->views();
+                break;
+        }
+    }
 
 }

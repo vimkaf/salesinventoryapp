@@ -20,9 +20,10 @@ class Login extends Trongate{
 
         $username = post('username');
 
-        $this->_login_user($username);
+        $employee = $this->_login_user($username);
 
-
+        $_SESSION['employee'] = $employee;
+        
         redirect('/dashboard');
 
     }
@@ -67,6 +68,8 @@ class Login extends Trongate{
         $this->trongate_tokens->_generate_token([
             'user_id' => $trongate_user_id
         ]);
+
+        return $employee;
 
     }
 

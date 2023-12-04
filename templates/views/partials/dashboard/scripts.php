@@ -28,8 +28,5 @@
 <script src="<?= BASE_URL;?>/assets/dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= BASE_URL;?>/assets/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?= BASE_URL;?>/assets/dist/js/demo.js"></script>
-
 <!-- Toastr -->
 <script src="<?= BASE_URL;?>/assets/dist/plugins/toastr/toastr.min.js"></script>
