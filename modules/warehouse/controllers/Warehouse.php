@@ -60,9 +60,6 @@ class Warehouse extends Trongate{
         }
     }
     function update(){
-        if($_SERVER['REQUEST_METHOD'] === "GET"){
-
-        }
         if($_SERVER['REQUEST_METHOD'] === "POST"){
             $this->_update_warehouse();
         }
@@ -74,14 +71,22 @@ class Warehouse extends Trongate{
         $data['warehouse_location'] = post('warehouse_location');
         $data['warehouse_address'] = post('warehouse_address');
         $this->model->update_where('warehouse_id',$id,$data,'warehouses');
-        redirect('/warehouse/edit');
+        set_flashdata([
+            'type' => 'success',
+            'message' => 'Warehouse Have been Edited'
+        ]);
+        redirect('/warehouse/list');
     }
-    function delete(){
+    function delete($id){
         if($_SERVER['REQUEST_METHOD'] === "GET"){
-
+            $id = (int) $id;    
+            $query = "DELETE FROM warehouses WHERE warehouse_id ='$id'";
+            $this->model->query($query,'object');     
+            set_flashdata([
+                'type' => 'success',
+                'message' => 'Warehouse Have been Deleted'
+            ]);
+            redirect('/warehouse/list');
         }
-        if($_SERVER['REQUEST_METHOD'] === "POST"){
-
-        }
-    }
+    } 
 }

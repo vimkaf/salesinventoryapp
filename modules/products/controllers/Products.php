@@ -182,7 +182,7 @@ class Products extends Trongate{
             redirect('/products/list');            
         }
             $query = "DELETE FROM products WHERE product_id ='$id'";
-            $da = $this->model->query($query,'object');
+            $this->model->query($query,'object');
             set_flashdata([
                 'type' => 'success',
                 'message' => 'Product have been deleted'

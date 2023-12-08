@@ -140,7 +140,7 @@ class Dashboard extends Trongate{
     function warehouse($action){
         $id = segment(4);
         $product_name = segment(5);
-
+        
         $this->module('warehouse');
 
         switch ($action){
@@ -163,7 +163,8 @@ class Dashboard extends Trongate{
         }
     }
     function customer($action){
-        
+        $id = segment(4);
+
         $this->module('customer');
 
         switch ($action){
@@ -173,12 +174,21 @@ class Dashboard extends Trongate{
                 break;
             case "view":
                 $this->_make_sure_allowed($this->everyone);
-                $this->customer->view();
+                $this->customer->list();
+                break;
+            case "edit":
+                $this->_make_sure_allowed($this->everyone);
+                $this->customer->edit($id);
+                break;
+            case "delete":
+                $this->_make_sure_allowed($this->everyone);
+                $this->customer->delete($id);
                 break;
         }
     }
     function employee($action){
-        
+        $id = segment(4);
+
         $this->module('employee');
 
         switch ($action){
@@ -189,6 +199,14 @@ class Dashboard extends Trongate{
             case "views":
                 $this->_make_sure_allowed($this->everyone);
                 $this->employee->views();
+                break;
+            case "edit":
+                $this->_make_sure_allowed($this->everyone);
+                $this->employee->edit($id);
+                break;
+            case "delete":
+                $this->_make_sure_allowed($this->everyone);
+                $this->employee->delete($id);
                 break;
         }
     }

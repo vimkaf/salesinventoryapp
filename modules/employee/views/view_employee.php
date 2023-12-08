@@ -47,7 +47,7 @@
                       <th>Phone No</th>
                       <th>Role</th>
                       <th>Member_id</th>
-                      <th>Trongate_user_id</th>
+                      <th>Trongate_id</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -62,8 +62,8 @@
                         <td><?= $employee->role;?></td>
                         <td><?= $employee->member_id;?></td>
                         <td><?= $employee->trongate_user_id;?></td>
-                        <td><a href="/dashboard/products/edit/<?= $employee->employee_id;?>">Edit</a></td>
-                        <td><a href="/dashboard/products/delete/<?= $employee->employee_id;?>">Delete</a></td>
+                        <td><a href="/dashboard/employee/edit/<?= $employee->employee_id;?>">Edit</a></td>
+                        <td><a href="/dashboard/employee/delete/<?= $employee->employee_id;?>">Delete</a></td>
                       </tr>
                       <?php $id++;?>
                       
