@@ -16,7 +16,7 @@
 */
 
 //The main config file
-define('BASE_URL', 'http://localhost:8080');
+define('BASE_URL', 'http://localhost/salesinventoryapp');
 define('ENV', 'dev');
 define('DEFAULT_MODULE', 'login');
 define('DEFAULT_CONTROLLER', 'Login');
