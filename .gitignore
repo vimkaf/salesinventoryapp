@@ -6,3 +6,4 @@ vendor
 .env
 /public/uploads/*
 !public/uploads/index.html
+config/config.php

@@ -1,6 +1,12 @@
 {
     "require": {
         "robmorgan/phinx": "^0.15.2",
-        "filp/whoops": "^2.15"
+        "filp/whoops": "^2.15",
+        "league/csv": "^9.0"
+    },
+    "autoload": {
+        "files": [
+            "helpers/autoload.php"
+        ]
     }
 }

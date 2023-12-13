@@ -1,6 +1,6 @@
 <?php
 /*
-    *** PLEASE GIVE TRONGATE A STAR ON GITHUB ***
+    *(* PLEASE GIVE TRONGATE A STAR ON GITHUB ***
 
     GitHub stars are the metric by which the success of frameworks gets measured.  
     We need 1,200 GitHub stars to make Trongate a top ten PHP framework.  
@@ -16,7 +16,7 @@
 */
 
 //The main config file
-define('BASE_URL', 'http://localhost/salesinventoryapp/');
+define('BASE_URL', '');
 define('ENV', 'dev');
 define('DEFAULT_MODULE', 'login');
 define('DEFAULT_CONTROLLER', 'Login');
