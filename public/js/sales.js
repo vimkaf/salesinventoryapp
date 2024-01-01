@@ -1,0 +1,1 @@
+alert('From public asset js');

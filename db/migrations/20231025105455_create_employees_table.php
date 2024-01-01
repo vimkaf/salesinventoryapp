@@ -19,14 +19,15 @@ final class CreateEmployeesTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('employees',['id'=>'employee_id']);
-        $table->addColumn('first_name','text');
-        $table->addColumn('last_name','text');
-        $table->addColumn('email','string');
-        $table->addColumn('phone_number','string');
-        $table->addColumn('role','string');
-        $table->addColumn('member_id','integer');
-        $table->addColumn('trongate_user_id','integer');
+        $table = $this->table('employees', ['id' => 'employee_id']);
+        $table->addColumn('warehouse_id', 'integer', ['null' => true]);
+        $table->addColumn('first_name', 'text');
+        $table->addColumn('last_name', 'text');
+        $table->addColumn('email', 'string');
+        $table->addColumn('phone_number', 'string');
+        $table->addColumn('role', 'string');
+        $table->addColumn('member_id', 'integer');
+        $table->addColumn('trongate_user_id', 'integer');
         $table->create();
     }
 }

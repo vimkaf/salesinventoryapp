@@ -19,15 +19,19 @@ final class CreateSalesTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('sales',['id'=>'sale_id']);
-        $table->addColumn('product_id','integer');
-        // $table->addColumn('quantity_sold','integer');
-        $table->addColumn('date_of_sale','date');
-        $table->addColumn('total_price','double');
-        $table->addColumn('customer_id','integer');
-        $table->addColumn('warehouse_id','integer');
-        // $table->addColumn('price','double');
-        $table->addColumn('status','string');
+        $table = $this->table('sales', ['id' => 'sale_id']);
+        $table->addColumn('sale_number', 'string');
+        $table->addColumn('date_of_sale', 'date');
+        $table->addColumn('total_price', 'double');
+        $table->addColumn('customer_id', 'integer');
+        $table->addColumn('warehouse_id', 'integer');
+        $table->addColumn('amount_paid', 'double');
+        $table->addColumn('status', 'string');
+        $table->addColumn('discount', 'double');
+        $table->addColumn('tax', 'double');
+        $table->addColumn('grand_total', 'double');
+
+
         $table->create();
     }
 }

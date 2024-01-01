@@ -42,17 +42,30 @@
                                             Product Name
                                             <span class="required_field">*</span>
                                         </label>
-                                        <input type="text" class="form-control" placeholder="Product Name" name="product_name" required>
+                                        <input type="text" class="form-control" placeholder="Product Name"
+                                            name="product_name" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Product Price <span class="required_field">*</span>
+                                        <label for="exampleInputPassword1">Product Price <span
+                                                class="required_field">*</span>
                                         </label>
-                                        <input type="number" class="form-control" placeholder="Product Price" name="product_price" required>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">&#8358;</span>
+                                            </div>
+
+                                            <input type="text" inputmode="numeric" class="form-control currency-mask"
+                                                placeholder="Product Price" name="product_price" required>
+
+                                        </div>
+
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Product Code <span class="required_field">*</span>
+                                        <label for="exampleInputPassword1">Product Code <span
+                                                class="required_field">*</span>
                                         </label>
-                                        <input type="text" class="form-control" placeholder="Product Code" name="product_code" required>
+                                        <input type="text" class="form-control" placeholder="Product Code"
+                                            name="product_code" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputFile">Product Image(Max size: 2MB)</label>
@@ -67,25 +80,31 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Category <span class="required_field">*</span>
+                                        <label for="exampleInputPassword1">Category <span
+                                                class="required_field">*</span>
                                         </label>
                                         <select name="category_id" id="" class="form-control" required>
                                             <option value="">Category</option>
-                                            <?php foreach ($categories as $category) : ?>
-                                                <option value="<?= $category->category_id; ?>"><?= $category->category_name; ?></option>
+                                            <?php foreach ($categories as $category): ?>
+                                                <option value="<?= $category->category_id; ?>">
+                                                    <?= $category->category_name; ?>
+                                                </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Product Brand</label>
-                                        <input type="text" class="form-control" placeholder="Product Brand" name="brand">
+                                        <input type="text" class="form-control" placeholder="Product Brand"
+                                            name="brand">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Product Model</label>
-                                        <input type="text" class="form-control" placeholder="Product Model" name="model">
+                                        <input type="text" class="form-control" placeholder="Product Model"
+                                            name="model">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Product Unit <span class="required_field">*</span>
+                                        <label for="exampleInputPassword1">Product Unit <span
+                                                class="required_field">*</span>
                                         </label>
                                         <select name="unit" id="unit" class="form-control" required>
                                             <option value="">Pick a unit for the product</option>

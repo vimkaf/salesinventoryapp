@@ -1,7 +1,8 @@
 <?php
 class Auth extends Trongate
 {
-    public function index(){
+    public function index()
+    {
         echo "No lele";
     }
 }

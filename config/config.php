@@ -24,3 +24,5 @@ define('DEFAULT_METHOD', 'index');
 define('MODULE_ASSETS_TRIGGER', '_module');
 define('INTERCEPT_404', 'trongate_pages/attempt_display');
 define('CONFIG_PATH', __DIR__);
+define('APP_VERSION', '1.0.0');
+

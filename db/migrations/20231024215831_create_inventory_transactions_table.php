@@ -20,14 +20,15 @@ final class CreateInventoryTransactionsTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('inventory_transactions',['id'=>'transaction_id']);
-        $table->addColumn('inventory_id','integer');
-        $table->addColumn('transaction_type','string');
-        $table->addColumn('quantity','integer');
-        $table->addColumn('transaction_date','date');
-        $table->addColumn('employee_id','integer');
-        $table->addColumn('remarks','text',['null'=>true]);
-        $table->addColumn('reference_id','string');
+        $table = $this->table('inventory_transactions', ['id' => 'transaction_id']);
+        $table->addColumn('inventory_id', 'integer');
+        $table->addColumn('transaction_type', 'string');
+        $table->addColumn('quantity', 'integer');
+        $table->addColumn('previous_quantity', 'integer');
+        $table->addColumn('transaction_date', 'date');
+        $table->addColumn('employee_id', 'integer');
+        $table->addColumn('remarks', 'text', ['null' => true]);
+        $table->addColumn('reference_id', 'string');
         $table->Create();
     }
 }

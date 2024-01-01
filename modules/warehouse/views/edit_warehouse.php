@@ -29,7 +29,7 @@
           <div class="card-body">
             <!-- form start -->
               <div class="row justify-content-around">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <div class="form-group">
                       <label>Warehouse Code</label>
                       <input value="<?= $warehouse[0]->warehouse_id;?>" type="hidden" name="warehouse_id">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-5">
+                <div class="col-md-6">
                   <div class="form-group">
                   <label>Warehouse Name</label>
                       <input value="<?= $warehouse[0]->warehouse_name;?>" type="text" class="form-control" placeholder="Name" name="warehouse_name" required>

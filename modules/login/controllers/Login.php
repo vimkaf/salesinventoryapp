@@ -27,7 +27,53 @@ class Login extends Trongate
 
         $_SESSION['employee'] = $employee;
 
+        if ($employee->role === "sales") {
+            redirect('dashboard/sales/pos');
+        }
+
+        if ($employee->role === "cashier") {
+            redirect('dashboard/cashier');
+        }
+
         redirect('dashboard');
+    }
+
+
+    function _create_user_login(int $employeeID, int $role, string $phoneNumber)
+    {
+
+        $data = [
+            'employee_id' => $employeeID,
+            'role' => $role,
+            'username' => $phoneNumber,
+            'password' => $this->_gen_password($phoneNumber)
+
+        ];
+
+        $this->model->insert($data, "user_login");
+    }
+
+    function _reset_password(int $employeeID, string $password)
+    {
+        $password = $this->_hash_string($password);
+
+        $query = "UPDATE user_login SET password = :password WHERE employee_id = :employee_id";
+
+        $data = [
+            'password' => $password,
+            'employee_id' => $employeeID
+        ];
+
+        $this->model->query_bind($query, $data);
+
+    }
+
+    function _gen_password(string $phoneNumber)
+    {
+        $offset = strlen($phoneNumber) - 4;
+        $len = strlen($phoneNumber);
+
+        return $this->_hash_string(substr($phoneNumber, $offset, $len));
     }
 
     function _hash_string($str)
@@ -43,10 +89,10 @@ class Login extends Trongate
         $error_msg = "your username and/or password combination is invalid";
 
         $user_obj = $this->model->get_one_where('username', $username, 'user_login');
+
         if ($user_obj === false) {
             return $error_msg;
         }
-
 
         $password = post('password');
         $stored_password = $user_obj->password;

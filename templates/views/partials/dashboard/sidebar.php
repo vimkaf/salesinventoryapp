@@ -3,11 +3,11 @@
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
         <li class="nav-item">
-            <a href="<?= base_url('dashboard') ?>" class="nav-link <?= segment(1) === 'dashboard' && segment(2) == "" ? 'active' : '' ?>">
+            <a href="<?= base_url('dashboard') ?>"
+                class="nav-link <?= segment(1) === 'dashboard' && segment(2) == "" ? 'active' : '' ?>">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                     Dashboard
-                    <i class=""></i>
                 </p>
             </a>
 
@@ -57,35 +57,48 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="<?= BASE_URL; ?>dashboard/inventory/add_stocks" class="nav-link">
+                    <a href="<?= BASE_URL; ?>dashboard/inventory/stocks"
+                        class="nav-link <?= segment(3) === 'stocks' ? 'active' : '' ?>">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Stocks</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= BASE_URL; ?>dashboard/inventory/add_stocks"
+                        class="nav-link <?= segment(3) === 'add_stocks' ? 'active' : '' ?>">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Add Stock</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= BASE_URL; ?>dashboard/inventory/add_adjustments" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Add Quantity</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?= BASE_URL; ?>dashboard/inventory/quantity" class="nav-link">
+                    <a href="<?= BASE_URL; ?>dashboard/inventory/add_adjustments"
+                        class="nav-link <?= segment(3) === 'add_adjustments' ? 'active' : '' ?>">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Quantity Adjustment</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= BASE_URL; ?>dashboard/inventory/stock_count" class="nav-link">
+                    <a href="<?= BASE_URL; ?>dashboard/inventory/adjustments"
+                        class="nav-link <?= segment(3) === 'adjustments' || segment(3) === 'filter_adjustments' ? 'active' : '' ?>">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Stock Counts</p>
+                        <p>Adjustments</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= BASE_URL; ?>dashboard/products/count" class="nav-link">
+                    <a href="<?= BASE_URL; ?>dashboard/inventory/count_stock"
+                        class="nav-link <?= segment(3) === 'count_stock' ? 'active' : '' ?>">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Count Stock</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= BASE_URL; ?>dashboard/inventory/stock_count"
+                        class="nav-link <?= segment(3) === 'stock_count' ? 'active' : '' ?>">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Stock Counts</p>
+                    </a>
+                </li>
+
             </ul>
         </li>
         <li class="nav-item">
@@ -110,14 +123,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a target="_blank" href="<?= base_url('dashboard/sales/pos') ?>" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>POS Sales</p>
+                        <p>POS</p>
                     </a>
                 </li>
             </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item d-none">
             <a href="#" class="nav-link <?= segment(2) === 'purchases' ? 'active' : '' ?>">
                 <i class="nav-icon fas fa-box"></i>
                 <p>
@@ -129,7 +142,7 @@
                 <li class="nav-item">
                     <a href="<?= BASE_URL; ?>document/purchases/add" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Create Porchase Order</p>
+                        <p>Create Purchase Order</p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -141,7 +154,7 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link <?= segment(2) === 'warehouses' ? 'active' : '' ?>">
+            <a href="#" class="nav-link <?= segment(2) === 'warehouse' ? 'active' : '' ?>">
                 <i class="nav-icon fas fa-building"></i>
                 <p>
                     Warehouses
@@ -150,7 +163,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="<?= BASE_URL; ?>dashboard/warehouse/add" class="nav-link">
+                    <a href="<?= BASE_URL; ?>dashboard/warehouse/add" class="nav-link0">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Add Warehouse</p>
                     </a>
@@ -185,7 +198,7 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link <?= segment(2) === 'employees' ? 'active' : '' ?>">
+            <a href="#" class="nav-link <?= segment(2) === 'employee' ? 'active' : '' ?>">
                 <i class="nav-icon fas fa-user-friends"></i>
                 <p>
                     Employees
@@ -225,7 +238,7 @@
 
             </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item d-none">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>

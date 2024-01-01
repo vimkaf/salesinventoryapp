@@ -20,14 +20,16 @@ final class CreateReceiptsTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('receipts',['id'=>'receipt_id']);
-        $table->addColumn('receipt_number','string');
-        $table->addColumn('invoice_number','string',['null'=>true]);
-        $table->addColumn('date','date');
-        $table->addColumn('amount','double');
-        $table->addColumn('balance','double');
-        $table->addColumn('customer_id','integer');
-        $table->addColumn('payment_methode','string');
+        $table = $this->table('receipts', ['id' => 'receipt_id']);
+        $table->addColumn('sale_id', 'int');
+        $table->addColumn('receipt_number', 'string', ['null' => true]);
+        $table->addColumn('date', 'date');
+        $table->addColumn('amount', 'double');
+        $table->addColumn('balance', 'double');
+        $table->addColumn('change', 'double');
+        $table->addColumn('customer_id', 'integer');
+        $table->addColumn('payment_method', 'string');
+        $table->addColumn('employee_id', 'integer');
         $table->create();
     }
 }

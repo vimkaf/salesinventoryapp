@@ -21,9 +21,10 @@
 <script src="<?= BASE_URL; ?>assets/dist/plugins/moment/moment.min.js"></script>
 <script src="<?= BASE_URL; ?>assets/dist/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="<?= BASE_URL; ?>assets/dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script
+    src="<?= BASE_URL; ?>assets/dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
-<script src="<?= BASE_URL; ?>assets/bist/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="<?= BASE_URL; ?>assets/dist/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="<?= BASE_URL; ?>assets/dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
@@ -33,8 +34,47 @@
 
 <script src="<?= BASE_URL; ?>assets/dist/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 
+<!-- Select2 -->
+<script src="<?= BASE_URL; ?>assets/dist/plugins/select2/js/select2.full.min.js"></script>
+
+<!-- Date range picker-->
+<script src="<?= BASE_URL; ?>assets/dist/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="<?= BASE_URL; ?>assets/dist/plugins/inputmask/jquery.inputmask.min.js"></script>
+
+<script src="<?= BASE_URL; ?>assets/dist/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= BASE_URL; ?>assets/dist/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?= BASE_URL; ?>assets/dist/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?= BASE_URL; ?>assets/dist/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
 <script>
-    $(function() {
+    $(function () {
         bsCustomFileInput.init();
+
+        //Initialize Select2 Elements
+        $('.select2').select2({
+            theme: 'bootstrap4'
+        });
+
+        $('.date-range').daterangepicker({
+            format: 'Y-m-d'
+        });
+
+        //Money
+        $('.currency-mask').inputmask({
+            alias: 'currency'
+        });
+
+        //DataTables
+        $('.datatable').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+
     });
 </script>

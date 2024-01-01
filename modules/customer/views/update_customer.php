@@ -28,8 +28,8 @@
 
           <div class="card-body">
             <!-- form start -->
-              <div class="row justify-content-around">
-                <div class="col-md-5">
+              <div class="row">
+                <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputEmail1">First Name</label>
                       <input value="<?= $customer[0]->first_name;?>" type="text" class="form-control" placeholder="First Name" name="first_name" required>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-5">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label for="exampleInputPassword1">Phone Number</label>
                     <input value="<?= $customer[0]->phone_number;?>" type="text" class="form-control" placeholder="Phone Number" name="phone_number" required>

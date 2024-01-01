@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class CreateSalesProductTable extends AbstractMigration
+final class CreateStockCountsTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -19,11 +19,16 @@ final class CreateSalesProductTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('sales_product',['id'=>'sale_id']);
-        $table = addColumn('sale_id','integer');
-        $table = addColumn('product_id','integer');
-        $table = addColumn('quantity_sold','integer');
-        $table = addColumn('price','integer');
-        $table = create();
+
+        $table = $this->table('stock_count', ['id' => 'id']);
+
+        $table->addColumn('reference', 'string');
+        $table->addColumn('title', 'string');
+        $table->addColumn('date', 'date');
+        $table->addColumn('stock_count', 'json');
+        $table->addColumn('employee_id', 'integer');
+        $table->addColumn('warehouse_id', 'string');
+
+        $table->create();
     }
 }

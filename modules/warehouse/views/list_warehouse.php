@@ -56,8 +56,8 @@
                         <td><?= $warehouse->warehouse_code;?></td>
                         <td><?= $warehouse->warehouse_location;?></td>
                         <td><?= $warehouse->warehouse_address; ?></td>
-                        <td><a href="/dashboard/warehouse/edit/<?= $warehouse->warehouse_id;?>">Edit</a></td>
-                        <td><a href="/dashboard/warehouse/delete/<?= $warehouse->warehouse_id;?>">Delete</a></td>
+                        <td><a href="<?= base_url('/dashboard/warehouse/edit/'.$warehouse->warehouse_id);?>">Edit</a></td>
+                        <td><a href="<?= base_url('/dashboard/warehouse/delete/'.$warehouse->warehouse_id);?>">Delete</a></td>
                       </tr>
                       <?php $id++;?>
                     <?php endforeach;?>

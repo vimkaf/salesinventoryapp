@@ -53,6 +53,14 @@
 
     <?= Template::partial('partials/dashboard/toast'); ?>
 
+    <?php if (isset($data['view_scripts'])) : ?>
+        <?= Template::partial('partials/dashboard/view_scripts', $data); ?>
+    <?php endif; ?>
+
+    <?php if (isset($data['view_fragments'])) : ?>
+        <?= Template::partial('partials/dashboard/view_fragments', $data); ?>
+    <?php endif; ?>
+
 
 </body>
 

@@ -11,6 +11,12 @@ class Products extends Trongate
         $this->getlistproduct();
     }
 
+    function _get_products()
+    {
+        $sql = "SELECT * FROM products";
+        return $this->model->query($sql, 'object');
+    }
+
     function getlistproduct()
     {
         $sql = "SELECT * FROM products 
@@ -21,7 +27,7 @@ class Products extends Trongate
 
         $pagination_data['total_rows'] = count($products);
         $pagination_data['page_num_segment'] = 4;
-        $pagination_data['limit'] = 1;
+        $pagination_data['limit'] = 20;
         $pagination_data['pagination_root'] = 'dashboard/products/list';
         $pagination_data['include_showing_statement'] = true;
         $pagination_data['record_name_plural'] = 'products';
@@ -81,7 +87,7 @@ class Products extends Trongate
         $newimagename = $path . $name . $extension;
         $imagename = $name . $extension;
 
-        $image_uploaded =  move_uploaded_file($image['tmp_name'], $newimagename);
+        $image_uploaded = move_uploaded_file($image['tmp_name'], $newimagename);
 
         if ($image_uploaded) {
             return $imagename;
@@ -101,7 +107,7 @@ class Products extends Trongate
         if ($_FILES['product_image']['size'] === 0) {
             $image_uploaded = "blank.jpg";
         } else {
-            $image_uploaded = $this->_upload_product_image(post('product_name'),  post('product_code'));
+            $image_uploaded = $this->_upload_product_image(post('product_name'), post('product_code'));
         }
 
 
@@ -115,7 +121,7 @@ class Products extends Trongate
         }
 
         $data['product_name'] = post('product_name');
-        $data['product_price'] = post('product_price');
+        $data['product_price'] = str_replace(",", "", post('product_price'));
         $data['product_code'] = post('product_code');
         $data['product_image'] = $image_uploaded;
         $data['category_id'] = post('category_id');
@@ -192,7 +198,7 @@ class Products extends Trongate
 
 
         $data['product_name'] = post('product_name');
-        $data['product_price'] = post('product_price');
+        $data['product_price'] = str_replace(",", "", post('product_price'));
         $data['product_code'] = post('product_code');
         $data['category_id'] = post('category_id');
         $data['brand'] = post('brand');

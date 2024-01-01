@@ -19,11 +19,11 @@ final class CreateSaleProductsTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table  = $this->table('sale_products',['id'=>'id']);
-        $table = addColumn('sale_id','integer');
-        $table = addColumn('product_id','integer');
-        $table = addcolumn('quantity_sold','integet');
-        $table = addColunm('price','integer');
-        $table = create();
+        $table  = $this->table('sale_products', ['id' => 'id']);
+        $table->addColumn('sale_id', 'integer');
+        $table->addColumn('product_id', 'integer');
+        $table->addColumn('quantity_sold', 'integer');
+        $table->addColumn('price', 'integer');
+        $table->create();
     }
 }
