@@ -32,7 +32,11 @@ class Login extends Trongate
         }
 
         if ($employee->role === "cashier") {
-            redirect('dashboard/cashier');
+            redirect('cashier');
+        }
+
+        if ($employee->role === "pharmacist") {
+            redirect('pharmacy');
         }
 
         redirect('dashboard');

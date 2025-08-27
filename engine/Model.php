@@ -26,6 +26,7 @@ class Model
         $this->current_module = $current_module;
 
         $dsn = 'mysql:host=' . $this->host . ';port=' . $this->port . ';dbname=' . $this->dbname;
+        // $dsn = 'sqlite:../db/database.db.sqlite3';
         $options = array(
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -378,7 +379,7 @@ class Model
 
         echo '<div class="tg-rprt"><b>QUERY TO BE EXECUTED:</b><br><br>  -> ';
         echo $query . $caveat_info . '</div>';
-?>
+        ?>
 
         <style>
             .tg-rprt {
@@ -392,7 +393,7 @@ class Model
             }
         </style>
 
-<?php
+        <?php
     }
 
     public function insert($data, $target_tbl = null)

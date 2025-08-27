@@ -10,6 +10,7 @@ class Dashboard extends Trongate
      * 2 => Manager
      * 3 => Sales
      * 4 => Cashier
+     * 5 => Pharmacist
      **/
 
     protected array $adminOnly = [1];
@@ -25,6 +26,8 @@ class Dashboard extends Trongate
     protected array $salesOnly = [3];
 
     protected array $managerOnly = [2];
+
+    protected array $pharmacistOnly = [5];
 
     function __construct()
     {
@@ -49,12 +52,12 @@ class Dashboard extends Trongate
     function index()
     {
 
-
         $product = $this->model->query('SELECT COUNT(product_id) AS count FROM products', 'object')[0];
 
         $todayDate = date("Y-m-d");
 
         $this->module('warehouse');
+        $this->module('trongate_users');
 
         $warehouses = $this->warehouse->employees_warehouses();
 
@@ -106,7 +109,7 @@ class Dashboard extends Trongate
         redirect('login');
     }
 
-    function _make_sure_allowed(int|array $userLevels = null)
+    function _make_sure_allowed(int|array|null $userLevels = null)
     {
         $this->module('trongate_tokens');
 
@@ -248,7 +251,6 @@ class Dashboard extends Trongate
                 $this->_make_sure_allowed($this->salesOnly);
                 $this->sales->pos_report();
                 break;
-
             case "filter_pos_report":
                 $this->_make_sure_allowed($this->salesOnly);
                 $this->sales->_filter_pos_report();
@@ -277,12 +279,10 @@ class Dashboard extends Trongate
                 $this->_make_sure_allowed($this->everyone);
                 $this->sales->filter_sales();
                 break;
-
             case "receipts":
                 $this->_make_sure_allowed($this->everyone);
                 $this->sales->receipts($id);
                 break;
-
             case "checkinventory":
                 $this->_make_sure_allowed($this->everyone);
                 $this->sales->_checkinventory();

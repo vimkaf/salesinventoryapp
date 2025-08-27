@@ -4,7 +4,7 @@ require '../vendor/autoload.php';
 require_once '../config/site_settings.php';
 
 
-if(ENV === 'dev'){
+if (ENV === 'dev') {
     $whoops = new \Whoops\Run;
     $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
     $whoops->register();

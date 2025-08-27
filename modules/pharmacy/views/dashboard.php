@@ -22,16 +22,31 @@
                 <div class="small-box bg-info">
                     <div class="inner">
                         <h3>
-                            <?= number_format($productCount) ?>
+                            <?= number_format(0) ?>
                         </h3>
 
-                        <p>Products</p>
+                        <p>Invoices generated Today</p>
                     </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                    <a href="<?= base_url('dashboard/products') ?>" class="small-box-footer">More info <i
+                    <a href="<?= base_url('dashboard/invoice') ?>" class="small-box-footer">More info <i
                             class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <!-- ./col -->
+            <div class="col-lg-6 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>
+                            <?= numfmt_format_currency(numfmt_create("en_NG", NumberFormatter::CURRENCY), 0, 'NGN'); ?>
+
+                        </h3>
+
+                        <p>Daily Invoice</p>
+                    </div>
+                    <a href="<?= base_url('dashboard/sales/list') ?>" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
@@ -42,7 +57,7 @@
                 <div class="small-box bg-warning">
                     <div class="inner">
                         <h3>
-                            <?= number_format($employeeCount) ?>
+                            <?= number_format(0) ?>
                         </h3>
 
                         <p>Employees</p>
@@ -53,34 +68,51 @@
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-            <!-- ./col -->
-            <div class="col-lg-6 col-6">
-                <!-- small box -->
-                <div class="small-box bg-success">
-                    <div class="inner">
-                        <h3>
-                            <?= numfmt_format_currency($numberFormat, $todaySale, 'NGN'); ?>
-
-                        </h3>
-
-                        <p>Sales Today</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
-                    </div>
-                    <a href="<?= base_url('dashboard/sales/list') ?>" class="small-box-footer">
-                        More info <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-            <!-- ./col -->
 
         </div>
         <!-- /.row -->
 
-        <div class="row">
+    </div><!-- /.container-fluid -->
+</section>
 
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-link mr-1"></i> Quick Links</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 mb-2">
+                                <a href="<?= base_url('pharmacy/generateinvoice') ?>" class="btn btn-info btn-block">
+                                    <i class="fas fa-file-invoice"></i> Generate Invoice
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <a href="<?= base_url('dashboard/sales/list') ?>" class="btn btn-success btn-block">
+                                    <i class="fas fa-box"></i> Stock In
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <a href="<?= base_url('dashboard/products/lowstock') ?>"
+                                    class="btn btn-danger btn-block">
+                                    <i class="fas fa-exclamation-triangle"></i> Low Stock Report
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+</section>
+
+
+
+<section class="content">
+    <div class="container-fluid">
         <!-- Main row -->
         <div class="row">
             <!-- Left col -->
@@ -106,20 +138,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($lowinventory as $inventory): ?>
-                                    <tr>
-                                        <td>
-                                            <?= $inventory->product_name; ?>
-                                        </td>
-                                        <td>
-                                            <?= $inventory->warehouse_name; ?>
-                                        </td>
-                                        <td>
-                                            <?= $inventory->quantity_on_hand; ?>
-                                            [<?= $inventory->unit; ?>]
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
+
                             </tbody>
                         </table>
                     </div>
@@ -135,5 +154,6 @@
 
         </div>
         <!-- /.row (main row) -->
+
     </div><!-- /.container-fluid -->
 </section>

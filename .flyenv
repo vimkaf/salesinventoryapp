@@ -1,0 +1,2 @@
+#!/bin/zsh
+export PATH="C:\Users\DELL LATITUDE 7290\AppData\Local\Programs\PhpWebStudy-Data\app\php-8.4.11:$PATH" #FlyEnv-ID-70BRIC8eAqyuvhzVUc1gNcPHUsUG8lCC

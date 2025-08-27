@@ -2,6 +2,31 @@
 class Templates extends Trongate
 {
 
+    function pharmacy($data)
+    {
+
+        $paths = [];
+        
+        if (isset($data['view_fragments'])) {
+            if (is_array($data['view_fragments'])) {
+                foreach ($data['view_fragments'] as $fragment) {
+                    array_push($paths, $this->_get_view_path($fragment, $data['view_module']));
+                }
+            }
+
+            if (is_string($data['view_fragments'])) {
+                array_push($paths, $this->_get_view_path($data['view_fragments'], $data['view_module']));
+
+            }
+
+        }
+
+        $data['view_fragment_paths'] = $paths;
+
+
+        load('pharmacy', $data);
+    }
+
     function pos($data)
     {
         $paths = [];
@@ -53,7 +78,7 @@ class Templates extends Trongate
         load('login', $data);
     }
 
-    function public ($data)
+    function public($data)
     {
         if (isset($data['additional_includes_top'])) {
             $data['additional_includes_top'] = $this->_build_additional_includes($data['additional_includes_top']);

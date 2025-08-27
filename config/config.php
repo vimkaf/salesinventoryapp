@@ -16,7 +16,7 @@
 */
 
 //The main config file
-define('BASE_URL', 'http://localhost/salesinventoryapp/');
+define('BASE_URL', 'http://pharmacysalesinventory.test/');
 define('ENV', 'dev');
 define('DEFAULT_MODULE', 'login');
 define('DEFAULT_CONTROLLER', 'Login');

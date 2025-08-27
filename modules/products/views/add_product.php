@@ -45,6 +45,7 @@
                                         <input type="text" class="form-control" placeholder="Product Name"
                                             name="product_name" required>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Product Price <span
                                                 class="required_field">*</span>
@@ -55,7 +56,7 @@
                                             </div>
 
                                             <input type="text" inputmode="numeric" class="form-control currency-mask"
-                                                placeholder="Product Price" name="product_price" required>
+                                                placeholder="0.00" name="product_price" required>
 
                                         </div>
 
@@ -67,7 +68,7 @@
                                         <input type="text" class="form-control" placeholder="Product Code"
                                             name="product_code" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group d-none">
                                         <label for="exampleInputFile">Product Image(Max size: 2MB)</label>
                                         <div class="input-group">
                                             <div class="custom-file">
@@ -93,13 +94,28 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
+                                        <label for="exampleInputPassword1">Cost Price <span
+                                                class="required_field">*</span>
+                                        </label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">&#8358;</span>
+                                            </div>
+
+                                            <input type="text" inputmode="numeric" class="form-control currency-mask"
+                                                placeholder="0.00" name="cost_price" required>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group d-none">
                                         <label for="exampleInputPassword1">Product Brand</label>
-                                        <input type="text" class="form-control" placeholder="Product Brand"
+                                        <input type="text" class="form-control d-none" placeholder="Product Brand"
                                             name="brand">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group d-none">
                                         <label for="exampleInputPassword1">Product Model</label>
-                                        <input type="text" class="form-control" placeholder="Product Model"
+                                        <input type="text" class="form-control d-none" placeholder="Product Model"
                                             name="model">
                                     </div>
                                     <div class="form-group">

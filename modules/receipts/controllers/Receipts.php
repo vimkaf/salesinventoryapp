@@ -6,7 +6,7 @@ class Receipts extends Trongate
         $this->view('receipts');
     }
 
-    function _create_sales_receipt(int $saleID, int|float $amount, int|float $balance, int|float $change, int $customerID, int $employeeID, string $method = 'cash', string $date = null)
+    function _create_sales_receipt(int $saleID, int|float $amount, int|float $balance, int|float $change, int $customerID, int $employeeID, string $method = 'cash', ?string $date = null)
     {
         $data = [
             'sale_id' => $saleID,
@@ -81,11 +81,8 @@ class Receipts extends Trongate
 
 
         $totalPayments = array_reduce($receiptsRecord, function ($carry, $receipt) {
-
             return $carry += $receipt->amount;
         }, 0);
-
-
 
         $data['page_title'] = 'Sales Receipt';
         $data['view_module'] = 'receipts';

@@ -1,10 +1,10 @@
 <nav class="mt-2">
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
         <li class="nav-item">
-            <a href="<?= base_url('dashboard') ?>"
-                class="nav-link <?= segment(1) === 'dashboard' && segment(2) == "" ? 'active' : '' ?>">
+            <a href="<?= base_url('dashboard') ?>" class="nav-link
+                <?= segment(1) === 'dashboard' && segment(2) == '' ? 'active' : '' ?>">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                     Dashboard
@@ -12,6 +12,7 @@
             </a>
 
         </li>
+
         <li class="nav-item">
             <a href="#" class="nav-link <?= segment(2) === 'products' ? 'active' : '' ?>">
                 <i class="nav-icon fas fa-shopping-basket"></i>
