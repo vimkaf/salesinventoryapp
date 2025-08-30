@@ -222,6 +222,10 @@ class Dashboard extends Trongate
                 $this->_make_sure_allowed($this->adminAndManger);
                 $this->inventory->stock_count();
                 break;
+            case "stock_sheet":
+                $this->_make_sure_allowed($this->adminAndManger);
+                $this->inventory->stock_sheet();
+                break;
             case "download_stock_count":
                 $this->_make_sure_allowed($this->adminAndManger);
                 $this->inventory->download_stock_count($id);
@@ -246,6 +250,10 @@ class Dashboard extends Trongate
             case "pos":
                 $this->_make_sure_allowed($this->salesOnly);
                 $this->sales->dashboard();
+                break;
+            case "returnsale":
+                $this->_make_sure_allowed($this->adminAndSales);
+                $this->sales->return_sale();
                 break;
             case "pos_report":
                 $this->_make_sure_allowed($this->salesOnly);

@@ -39,7 +39,8 @@
  * @param string|null $additional_code An optional additional code to include in the form tag.
  * @return string The HTML opening tag for the form.
  */
-function form_open(string $location, ?array $attributes = null, ?string $additional_code = null) {
+function form_open(string $location, ?array $attributes = null, ?string $additional_code = null)
+{
     $extra = '';
 
     if (isset($attributes['method'])) {
@@ -51,19 +52,19 @@ function form_open(string $location, ?array $attributes = null, ?string $additio
 
     if (isset($attributes)) {
         foreach ($attributes as $key => $value) {
-            $extra.= ' '.$key.'="'.$value.'"';
+            $extra .= ' ' . $key . '="' . $value . '"';
         }
     }
 
     if (filter_var($location, FILTER_VALIDATE_URL) === FALSE) {
-        $location = BASE_URL.$location;
+        $location = BASE_URL . $location;
     }
 
     if (isset($additional_code)) {
-        $extra.= ' '.$additional_code;
+        $extra .= ' ' . $additional_code;
     }
 
-    $html = '<form action="'.$location.'" method="'.$method.'"'.$extra.'>';
+    $html = '<form action="' . $location . '" method="' . $method . '"' . $extra . '>';
     return $html;
 }
 
@@ -75,7 +76,8 @@ function form_open(string $location, ?array $attributes = null, ?string $additio
  * @param string|null $additional_code An optional additional code to include in the form tag.
  * @return string The HTML opening tag for the form with enctype set to "multipart/form-data."
  */
-function form_open_upload(string $location, ?array $attributes = null, ?string $additional_code = null) {
+function form_open_upload(string $location, ?array $attributes = null, ?string $additional_code = null)
+{
     $html = form_open($location, $attributes, $additional_code);
     $html = str_replace('>', ' enctype="multipart/form-data">', $html);
     return $html;
@@ -91,7 +93,8 @@ function form_open_upload(string $location, ?array $attributes = null, ?string $
  *
  * @return string The HTML closing tag for the form.
  */
-function form_close(): string {
+function form_close(): string
+{
     // 1. Generate the CSRF token
     $csrf_token = bin2hex(random_bytes(32));
 
@@ -120,7 +123,8 @@ function form_close(): string {
  *
  * @return string The output string generated from the specified file.
  */
-function build_output_str() {
+function build_output_str()
+{
     $output_str = file_get_contents(APPPATH . 'engine/views/highlight_errors.txt');
     return $output_str;
 }
@@ -131,7 +135,8 @@ function build_output_str() {
  * @param string $errors_json JSON data containing validation errors.
  * @return string HTML code for highlighting validation errors.
  */
-function highlight_validation_errors($errors_json) {
+function highlight_validation_errors($errors_json)
+{
     $code = '<div class="inline-validation-builder">';
     $output_str = build_output_str();
     $code .= '<script>let validationErrorsJson  = ' . json_encode($errors_json) . '</script>';
@@ -147,7 +152,8 @@ function highlight_validation_errors($errors_json) {
  * @param array|null $attributes An associative array of HTML attributes.
  * @return string A string representation of HTML attributes.
  */
-function get_attributes_str($attributes) {
+function get_attributes_str($attributes)
+{
     $attributes_str = '';
 
     if (!isset($attributes)) {
@@ -169,7 +175,8 @@ function get_attributes_str($attributes) {
  * @param string|null $additional_code Additional HTML code to append to the label element.
  * @return string The generated HTML label element.
  */
-function form_label($label_text, $attributes = null, $additional_code = null) {
+function form_label($label_text, $attributes = null, $additional_code = null)
+{
     $extra = '';
 
     if (isset($attributes)) {
@@ -193,7 +200,8 @@ function form_label($label_text, $attributes = null, $additional_code = null) {
  *
  * @return string The HTML representation of the input element.
  */
-function form_input(string $name, $value = null, ?array $attributes = null, ?string $additional_code = null): string {
+function form_input(string $name, $value = null, ?array $attributes = null, ?string $additional_code = null): string
+{
     $extra = '';
     if (!isset($value)) {
         $value = '';
@@ -219,7 +227,8 @@ function form_input(string $name, $value = null, ?array $attributes = null, ?str
  * @param string|null $additional_code Additional HTML code to append to the input element.
  * @return string|null The generated HTML input element with type "number", or null if not generated.
  */
-function form_number($name, $value = null, $attributes = null, $additional_code = null): ?string {
+function form_number($name, $value = null, $attributes = null, $additional_code = null): ?string
+{
     $html = form_input($name, $value, $attributes, $additional_code);
     $html = str_replace('type="text"', 'type="number"', $html);
     return $html;
@@ -234,7 +243,8 @@ function form_number($name, $value = null, $attributes = null, $additional_code 
  * @param string|null $additional_code Additional HTML code to append to the input element.
  * @return string The generated HTML input element with type "password".
  */
-function form_password($name, ?string $value = null, ?array $attributes = null, ?string $additional_code = null): string {
+function form_password($name, ?string $value = null, ?array $attributes = null, ?string $additional_code = null): string
+{
     $html = form_input($name, $value, $attributes, $additional_code);
     $html = str_replace('type="text"', 'type="password"', $html);
     return $html;
@@ -249,7 +259,8 @@ function form_password($name, ?string $value = null, ?array $attributes = null, 
  * @param string|null $additional_code Additional HTML code to append to the input element.
  * @return string The generated HTML input element with type "email".
  */
-function form_email($name, ?string $value = null, ?array $attributes = null, ?string $additional_code = null): string {
+function form_email($name, ?string $value = null, ?array $attributes = null, ?string $additional_code = null): string
+{
     $html = form_input($name, $value, $attributes, $additional_code);
     $html = str_replace('type="text"', 'type="email"', $html);
     return $html;
@@ -263,7 +274,8 @@ function form_email($name, ?string $value = null, ?array $attributes = null, ?st
  * @param string|null $additional_code Additional HTML code to append to the hidden input field.
  * @return string The generated HTML hidden input field.
  */
-function form_hidden($name, $value = null, $additional_code = null) {
+function form_hidden($name, $value = null, $additional_code = null)
+{
     $html = form_input($name, $value, $additional_code);
     $html = str_replace(' type="text" ', ' type="hidden" ', $html);
     return $html;
@@ -278,7 +290,8 @@ function form_hidden($name, $value = null, $additional_code = null) {
  * @param string|null $additional_code Additional HTML code to append to the textarea element.
  * @return string The generated HTML textarea element.
  */
-function form_textarea($name, $value = null, $attributes = null, $additional_code = null) {
+function form_textarea($name, $value = null, $attributes = null, $additional_code = null)
+{
     $extra = '';
     if (!isset($value)) {
         $value = '';
@@ -304,7 +317,8 @@ function form_textarea($name, $value = null, $attributes = null, $additional_cod
  * @param string|null $additional_code Additional HTML code to append to the button element.
  * @return string The generated HTML submit button element.
  */
-function form_submit(string $name, ?string $value = null, ?array $attributes = null, ?string $additional_code = null): string {
+function form_submit(string $name, ?string $value = null, ?array $attributes = null, ?string $additional_code = null): string
+{
     $extra = '';
     if (!isset($value)) {
         $value = $name;
@@ -330,7 +344,8 @@ function form_submit(string $name, ?string $value = null, ?array $attributes = n
  * @param string|null $additional_code Additional HTML code to append to the button element.
  * @return string The generated HTML button element.
  */
-function form_button(string $name, ?string $value = null, ?array $attributes = null, ?string $additional_code = null): string {
+function form_button(string $name, ?string $value = null, ?array $attributes = null, ?string $additional_code = null): string
+{
     $html = form_submit($name, $value, $attributes, $additional_code);
     $html = str_replace(' type="submit" ', ' type="button" ', $html);
     return $html;
@@ -346,7 +361,8 @@ function form_button(string $name, ?string $value = null, ?array $attributes = n
  * @param string|null $additional_code Additional HTML code to append to the input element.
  * @return string The generated HTML input element with type "radio".
  */
-function form_radio(string $name, ?string $value = null, bool $checked = false, ?array $attributes = null, ?string $additional_code = null): string {
+function form_radio(string $name, ?string $value = null, bool $checked = false, ?array $attributes = null, ?string $additional_code = null): string
+{
     $extra = '';
 
     if (!isset($value)) {
@@ -379,7 +395,8 @@ function form_radio(string $name, ?string $value = null, bool $checked = false, 
  * @param string|null $additional_code Additional HTML code to append to the input element.
  * @return string The generated HTML input element with type "checkbox".
  */
-function form_checkbox(string $name, ?string $value = null, bool $checked = false, ?array $attributes = null, ?string $additional_code = null): string {
+function form_checkbox(string $name, ?string $value = null, bool $checked = false, ?array $attributes = null, ?string $additional_code = null): string
+{
     $html = form_radio($name, $value, $checked, $attributes, $additional_code);
     $html = str_replace(' type="radio" ', ' type="checkbox" ', $html);
     return $html;
@@ -395,7 +412,8 @@ function form_checkbox(string $name, ?string $value = null, bool $checked = fals
  * @param string|null $additional_code Additional HTML code to include in the select element.
  * @return string The generated HTML for the select menu.
  */
-function form_dropdown(string $name, array $options, ?string $selected_key = null, ?array $attributes = null, ?string $additional_code = null): string {
+function form_dropdown(string $name, array $options, ?string $selected_key = null, ?array $attributes = null, ?string $additional_code = null): string
+{
     $extra = '';
     if (isset($attributes)) {
         $extra = get_attributes_str($attributes);
@@ -426,7 +444,8 @@ function form_dropdown(string $name, array $options, ?string $selected_key = nul
  * @param string|null $additional_code Additional HTML code to include in the file input.
  * @return string The generated HTML for the file input element.
  */
-function form_file_select(string $name, ?array $attributes = null, ?string $additional_code = null): string {
+function form_file_select(string $name, ?array $attributes = null, ?string $additional_code = null): string
+{
     $value = null;
     $html = form_input($name, $value, $attributes, $additional_code);
     $html = str_replace(' type="text" ', ' type="file" ', $html);
@@ -438,9 +457,10 @@ function form_file_select(string $name, ?array $attributes = null, ?string $addi
  *
  * @param string $field_name The name of the POST field to retrieve.
  * @param bool|null $clean_up Whether to clean up the retrieved value (default is null).
- * @return string|int|float The value retrieved from the POST data.
+ * @return string|int|float|array The value retrieved from the POST data.
  */
-function post(string $field_name, ?bool $clean_up = null) {
+function post(string $field_name, ?bool $clean_up = null)
+{
     if (!isset($_POST[$field_name])) {
         $value = '';
     } else {
@@ -448,7 +468,7 @@ function post(string $field_name, ?bool $clean_up = null) {
 
         if (isset($clean_up)) {
             $value = filter_string($value);
-            
+
             if (is_numeric($value)) {
                 $var_type = (strpos($value, '.') !== false) ? 'double' : 'int';
                 settype($value, $var_type);
@@ -466,7 +486,8 @@ function post(string $field_name, ?bool $clean_up = null) {
  * @param string[] $allowed_tags An optional array of allowed HTML tags (default is an empty array).
  * @return string The filtered and sanitized string.
  */
-function filter_string(string $string, array $allowed_tags = []) {
+function filter_string(string $string, array $allowed_tags = [])
+{
     // Remove HTML & PHP tags
     $string = strip_tags($string, implode('', $allowed_tags));
 
@@ -489,7 +510,8 @@ function filter_string(string $string, array $allowed_tags = []) {
  * @param string[] $allowed_chars An optional array of allowed characters.
  * @return string The filtered and sanitized name.
  */
-function filter_name(string $name, array $allowed_chars = []) {
+function filter_name(string $name, array $allowed_chars = [])
+{
     // Similar to filter_string() but better suited for usernames, etc.
 
     // Remove HTML & PHP tags (please read note above for more!)

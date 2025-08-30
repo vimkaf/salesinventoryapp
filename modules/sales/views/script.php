@@ -21,9 +21,10 @@
 
         let subTotal = 0,
             grandTotal = 0,
-            tax = <?= SALES_TAX; ?>,
-            discount = 0;
-
+            taxEnabled = <?= setting('sales_tax') ?>,
+            tax = <?= setting('sales_tax_percentage'); ?>,
+            discount = 0,
+            tenderMode = '<?= setting('tender_mode'); ?>';
 
         setup();
 
@@ -72,6 +73,10 @@
                 style: 'currency',
                 currency: 'NGN'
             })).format(grandTotal));
+
+            if (tenderMode === 'auto') {
+                $("#amount_paid").val(grandTotal)
+            }
         }
 
         const reInitSelect2 = function () {
@@ -193,7 +198,6 @@
                 subTotal += parseLocaleNumber($(totalInput).val());
             });
 
-
             assignSubTotal(subTotal);
 
             calcGrandTotal(subTotal);
@@ -201,9 +205,12 @@
 
         const calcGrandTotal = function (subTotal) {
 
-            taxValue = calcTaxValue(subTotal, tax);
+            taxValue = 0;
 
-            assignTax(taxValue);
+            if (taxEnabled) {
+                taxValue = calcTaxValue(subTotal, tax);
+                assignTax(taxValue);
+            }
 
             grandTotal = (subTotal + taxValue) - discount;
 
@@ -244,9 +251,7 @@
             const quantity = parseInt(qtyInput.val());
 
             moveToQtyField(id);
-
             calcTotal(quantity, price, id);
-
             isQtyAvailable(id);
 
         });

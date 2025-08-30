@@ -100,24 +100,22 @@
                                             <th>Date</th>
                                             <th>Customer Name</th>
                                             <th>WareHouse</th>
-                                            <th>Total</th>
-                                            <th>Amount Paid</th>
-                                            <th>Balance</th>
-                                            <th>Status</th>
+                                            <th>Total Amount</th>
+                                            <th>Return Amount</th>
+                                            <th>Net Total</th>
                                             <th>Employee</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $totalSales = $totalAmountPaid = $totalBalance = 0; ?>
-
-
+                                        <?php $totalSales = $totalAmountPaid = $totalBalance = $totalReturnedAmount = $totalNetTotal = 0; ?>
 
                                         <?php foreach ($sales as $key => $sale): ?>
                                             <?php
                                             $totalSales += $sale->grand_total;
                                             $totalAmountPaid += $sale->total_amount_paid;
-                                            $totalBalance += $sale->grand_total - $sale->total_amount_paid;
+                                            $totalNetTotal += $sale->grand_total - $sale->returned_amount;
+                                            $totalReturnedAmount += $sale->returned_amount;
                                             ?>
                                             <tr data-row-id="<?= $sale->sale_id; ?>">
                                                 <td>
@@ -138,13 +136,10 @@
                                                     <?= numfmt_format_currency($numberFormat, $sale->grand_total, 'NGN'); ?>
                                                 </td>
                                                 <td>
-                                                    <?= numfmt_format_currency($numberFormat, $sale->total_amount_paid, 'NGN'); ?>
+                                                    <?= numfmt_format_currency($numberFormat, $sale->returned_amount, 'NGN'); ?>
                                                 </td>
                                                 <td>
-                                                    <?= numfmt_format_currency($numberFormat, $sale->grand_total - $sale->total_amount_paid, 'NGN'); ?>
-                                                </td>
-                                                <td>
-                                                    <?= strtoupper($sale->status) ?>
+                                                    <?= numfmt_format_currency($numberFormat, $sale->grand_total, 'NGN'); ?>
                                                 </td>
                                                 <td>
                                                     <?= "{$sale->employee_first_name} {$sale->employee_last_name}" ?>
@@ -167,10 +162,10 @@
                                                 <?= numfmt_format_currency($numberFormat, $totalSales, 'NGN'); ?>
                                             </th>
                                             <th>
-                                                <?= numfmt_format_currency($numberFormat, $totalAmountPaid, 'NGN'); ?>
+                                                <?= numfmt_format_currency($numberFormat, $totalReturnedAmount, 'NGN'); ?>
                                             </th>
                                             <th>
-                                                <?= numfmt_format_currency($numberFormat, $totalBalance, 'NGN'); ?>
+                                                <?= numfmt_format_currency($numberFormat, $totalNetTotal, 'NGN'); ?>
                                             </th>
                                             <th></th>
                                         </tr>

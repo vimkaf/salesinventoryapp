@@ -1,5 +1,7 @@
 <?php
 
+use League\Csv\Writer;
+
 class Inventory extends Trongate
 {
 
@@ -80,7 +82,7 @@ class Inventory extends Trongate
     }
 
 
-    function _add_to_inventory($quantity, $product_id, $warehouse_id, $reorder_level, $purchase_order_number)
+    function _add_to_inventory($quantity, $product_id, $warehouse_id, $reorder_level = null, $purchase_order_number = null, $remarks = null)
     {
 
         $query = "SELECT * FROM inventory WHERE product_id = $product_id AND warehouse_id = $warehouse_id";
@@ -111,7 +113,7 @@ class Inventory extends Trongate
                     'quantity_on_hand' => $quantity,
                     'product_id' => $product_id,
                     'warehouse_id' => $warehouse_id,
-                    'reorder_level' => $reorder_level
+                    'reorder_level' => $reorder_level ?? 10
                 ], 'inventory');
             } catch (\PDOException $e) {
 
@@ -125,7 +127,7 @@ class Inventory extends Trongate
             quantity: $quantity,
             reference_id: $purchase_order_number,
             type: 'ADD',
-            remarks: 'Product added to stock',
+            remarks: $remarks ?? 'Product added to stock',
             previous_quantity: $inventory[0]->quantity_on_hand ?? 0
         );
 
@@ -516,6 +518,63 @@ class Inventory extends Trongate
         }
     }
 
+    public function stock_sheet($date = null)
+    {
+        $date = $_GET['date'] ?? date("Y-m-d");
+        $prevDate = date('Y-m-d', strtotime("$date -1 day"));
+
+        //get all the products
+        $products = $this->model->query("SELECT * FROM products", 'object');
+
+        $stockSheet = [];
+
+        foreach ($products as $product) {
+            //check whether the product is in stock
+            $productInventory = $this->model->query("SELECT inventory_id, quantity_on_hand FROM inventory WHERE product_id = {$product->product_id} AND warehouse_id = 1", 'object');
+            if (count($productInventory) == 0) {
+                continue;
+            }
+
+            $productInventory = $productInventory[0];
+
+            //stock in
+            $inventoryTransactions = $this->model->query("SELECT * FROM inventory_transactions WHERE inventory_id = {$productInventory->inventory_id} AND transaction_date = '$date'", 'object');
+
+            $stockInTransactions = array_filter($inventoryTransactions, fn($transaction) => $transaction->transaction_type === 'ADD');
+            $stockOutTransactions = array_filter($inventoryTransactions, fn($transaction) => $transaction->transaction_type === 'REMOVE');
+
+            $stockIn = array_reduce($stockInTransactions, fn($carry, $transaction) => $carry += $transaction->quantity, 0);
+            $stockOut = array_reduce($stockOutTransactions, fn($carry, $transaction) => $carry += $transaction->quantity, 0);
+
+            $lastTransaction = $this->model->query("SELECT * FROM inventory_transactions WHERE inventory_id = {$productInventory->inventory_id} AND transaction_date = '$prevDate' ORDER BY transaction_id DESC LIMIT 1", 'object');
+            $lastTransaction = $lastTransaction[0] ?? '';
+
+            $openingStock = match ($lastTransaction->transaction_type ?? '') {
+                'ADD' => $lastTransaction->quantity + $lastTransaction->previous_quantity,
+                'REMOVE' => $lastTransaction->previous_quantity - $lastTransaction->quantity,
+                default => 0
+            };
+
+            $stockSheet[] = [
+                'code' => $product->product_code,
+                'product' => "{$product->product_name}",
+                'openingStock' => $openingStock,
+                'stockIn' => $stockIn,
+                'stockOut' => $stockOut,
+                'closingStock' => $productInventory->quantity_on_hand,
+                'productUnit' => $product->unit
+            ];
+
+        }
+
+        $data['stock_sheet'] = $stockSheet;
+        $data['page_title'] = 'Stock Count';
+        $data['view_file'] = 'stock_sheet';
+        $data['view_module'] = 'inventory';
+        $this->template('dashboard', $data);
+
+    }
+
     function get_stock_count()
     {
         $warehouses = $this->warehouse->employees_warehouses();
@@ -544,8 +603,46 @@ class Inventory extends Trongate
         $query = "SELECT * FROM stock_count WHERE id = :id";
 
         $record = $this->model->query_bind($query, ['id' => $id], 'object');
+        $record = $record[0];
 
-        json($record);
+        $stockCounts = json_decode($record->stock_count);
+
+        $csv = Writer::createFromString();
+
+        $csv->insertOne([
+            'Code',
+            'Product',
+            'Quantity'
+        ]);
+
+        $records = [];
+
+        foreach ($stockCounts as $stock) {
+            $records[] = [
+                $stock->product_code,
+                $stock->product_name,
+                "{$stock->quantity_on_hand} ({$stock->unit})"
+            ];
+        }
+
+        $csv->insertAll($records);
+
+        $filename = "stock_count_{$record->reference}_" . str_replace("-", "_", $record->date) . ".csv";
+        $filePath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $filename;
+
+        // Write CSV to file
+        file_put_contents($filePath, $csv->toString());
+
+        // Send headers and output file for download
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Content-Length: ' . filesize($filePath));
+        readfile($filePath);
+
+        // Optionally delete the file after download
+        unlink($filePath);
+        exit;
+
     }
 
     function delete_stock_count(int $id)

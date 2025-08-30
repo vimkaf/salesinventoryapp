@@ -49,7 +49,6 @@ class UserLoginSeeder extends AbstractSeed
         ];
 
         $table->insert($data);
-
         $table->save();
 
     }

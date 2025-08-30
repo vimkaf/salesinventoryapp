@@ -2,8 +2,6 @@
 class Sales extends Trongate
 {
 
-
-
     function dashboard()
     {
         $this->module('warehouse');
@@ -23,6 +21,118 @@ class Sales extends Trongate
         $data['view_fragments'] = ['script', 'style'];
 
         $this->template('pos', $data);
+    }
+
+    function return_sale()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->_return_sale()) {
+                set_flashdata([
+                    'type' => 'success',
+                    'message' => 'Return completed'
+                ]);
+            } else {
+                set_flashdata([
+                    'type' => 'error',
+                    'message' => 'An unknown error occured when trying to complete the sale return'
+                ]);
+            }
+        }
+
+        if (isset($_GET['sale_number'])) {
+
+            $saleRecord = $data['saleRecord'] = $this->model->get_one_where('sale_number', $_GET['sale_number'], 'sales');
+
+            if ($saleRecord !== false && $saleRecord->returned) {
+                set_flashdata([
+                    'type' => 'error',
+                    'message' => 'Sale has been returned'
+                ]);
+
+                redirect('dashboard/sales/returnsale');
+            }
+
+            if ($saleRecord !== false) {
+                $data['customer'] = $this->model->get_one_where('customer_id', $saleRecord->customer_id, 'customers');
+                $data['warehouse'] = $this->model->get_one_where('warehouse_id', $saleRecord->warehouse_id, 'warehouses');
+                $sql = "SELECT * FROM sale_products LEFT JOIN products ON sale_products.product_id = products.product_id WHERE sale_id = $saleRecord->sale_id";
+                $data['sale_products'] = $this->model->query($sql, 'object');
+            }
+
+        }
+
+        $data['page_title'] = 'Return Sales';
+        $data['view_file'] = 'return_sales';
+        $data['view_module'] = 'sales';
+        $data['view_scripts'] = base_url(uri: "assets/dist/plugins/block-ui/jquery.blockUI.js");
+        $data['view_fragments'] = ['return_sale_script', 'style'];
+
+        $template = match ($_SESSION['employee']->role) {
+            'cashier' => 'cashier',
+            'sales' => 'sales',
+            'pos' => 'pos',
+            'admin' => 'dashboard'
+        };
+
+        $this->template($template, $data);
+    }
+
+    private function _return_sale(): bool
+    {
+        $this->module('inventory');
+
+        $sale = $this->model->get_one_where('sale_id', post('sale_id'), 'sales');
+        $products = post('product');
+
+        $returnSaleData = [];
+        foreach ($products as $key => $productID) {
+            $returnSaleData[] = [
+                'employee_id' => $_SESSION['employee']->employee_id,
+                'sale_id' => $sale->sale_id,
+                'product_id' => $productID,
+                'quantity_sold' => post('quantity_sold')[$key],
+                'quantity_returned' => post('quantity_returned')[$key],
+                'sale_price' => post('price')[$key],
+                'return_price' => post('price')[$key],
+                'date_time_returned' => date("Y-m-d H:i:s")
+            ];
+        }
+
+        //start a transaction
+        $this->model->query("START TRANSACTION");
+
+        try {
+            //insert the return sale data
+            $this->model->insert_batch('returned_products', $returnSaleData);
+
+            //update the inventory for each product
+            foreach ($products as $key => $productID) {
+                $newQty = post('quantity_sold')[$key] - post('quantity_returned')[$key];
+                $this->inventory->_add_to_inventory(
+                    quantity: (int) $newQty,
+                    product_id: $productID,
+                    warehouse_id: $sale->warehouse_id,
+                    remarks: "Return for sale #{$sale->sale_id}",
+                    purchase_order_number: $sale->sale_id
+                );
+            }
+
+            //update the sale record
+            $this->model->update_where('sale_id', $sale->sale_id, [
+                'returned' => 1,
+                'returned_amount' => post('netTotal')
+            ]);
+
+        } catch (Exception $e) {
+            $this->model->query("ROLLBACK");
+
+            return false;
+        }
+
+        //Commit the transaction
+        $this->model->query("COMMIT");
+        return true;
     }
 
     function pos()
@@ -420,7 +530,8 @@ class Sales extends Trongate
 
         $today = date('Y-m-d');
 
-        $sql = "SELECT s.sale_id,s.sale_number, s.date_of_sale, s.total_price, s.grand_total,s.status,
+        $sql = "SELECT s.sale_id,s.sale_number, s.date_of_sale, s.total_price, 
+        s.grand_total,s.status,s.returned_amount,s.returned,
         w.warehouse_name,
         c.first_name AS customer_first_name,
         c.last_name AS customer_last_name, e.first_name AS employee_first_name,
@@ -435,11 +546,8 @@ class Sales extends Trongate
         GROUP BY s.sale_id,sale_number, date_of_sale, grand_total,total_price,status,warehouse_name
         ORDER BY s.sale_id DESC";
 
-        $salesRecord = $this->model->query($sql, 'object');
-
-
         $data['warehouses'] = $warehouses;
-        $data['sales'] = $salesRecord;
+        $data['sales'] = $this->model->query($sql, 'object');
         $data['numberFormat'] = numfmt_create('en_NG', NumberFormatter::CURRENCY);
         $data['page_title'] = 'Today Sales';
         $data['view_file'] = 'lists';
@@ -497,6 +605,7 @@ class Sales extends Trongate
         }
 
         $query = "SELECT s.sale_id,s.sale_number, s.date_of_sale, s.total_price, s.grand_total,s.status,
+        s.returned_amount,s.returned,
         w.warehouse_name,
         c.first_name AS customer_first_name,
         c.last_name AS customer_last_name, e.first_name AS employee_first_name,
@@ -521,7 +630,6 @@ class Sales extends Trongate
                     $query_data[$query_key] = $_GET[$query_key];
                     $query .= " $key = $val ";
                 } else {
-
                     $query .= " $key $val ";
                 }
 
@@ -533,12 +641,10 @@ class Sales extends Trongate
 
         $query .= " ORDER BY s.sale_id DESC ";
 
-        $salesRecord = $this->model->query_bind($query, $query_data, 'object');
-
         $this->module('warehouse');
 
         $data['warehouses'] = $this->warehouse->employees_warehouses();
-        $data['sales'] = $salesRecord;
+        $data['sales'] = $this->model->query_bind($query, $query_data, 'object');
         $data['numberFormat'] = numfmt_create('en_NG', NumberFormatter::CURRENCY);
         $data['page_title'] = 'Filtered Sales Record';
         $data['view_file'] = 'lists';
@@ -546,11 +652,7 @@ class Sales extends Trongate
         $data['view_fragments'] = 'sales_script';
         $data['view_scripts'] = base_url("assets/dist/plugins/block-ui/jquery.blockUI.js");
 
-
-
         $this->template('dashboard', $data);
-
-
 
     }
 

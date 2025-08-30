@@ -128,9 +128,9 @@ class Products extends Trongate
         $data['brand'] = post('brand');
         $data['model'] = post('model');
         $data['unit'] = post('unit');
+        $data['cost_price'] = post('cost_price');
 
         $this->model->insert($data, 'products');
-
 
         set_flashdata([
             'type' => 'success',

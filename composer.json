@@ -6,7 +6,7 @@
     },
     "autoload": {
         "files": [
-            "helpers/autoload.php"
+            "helpers/autoload_helpers.php"
         ]
     }
 }

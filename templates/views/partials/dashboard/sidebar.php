@@ -60,43 +60,51 @@
                 <li class="nav-item">
                     <a href="<?= BASE_URL; ?>dashboard/inventory/stocks"
                         class="nav-link <?= segment(3) === 'stocks' ? 'active' : '' ?>">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="fa fa-box-open nav-icon"></i>
                         <p>Stocks</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="<?= BASE_URL; ?>dashboard/inventory/add_stocks"
                         class="nav-link <?= segment(3) === 'add_stocks' ? 'active' : '' ?>">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="fa fa-plus nav-icon"></i>
                         <p>Add Stock</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="<?= BASE_URL; ?>dashboard/inventory/add_adjustments"
                         class="nav-link <?= segment(3) === 'add_adjustments' ? 'active' : '' ?>">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="fa fa-calculator nav-icon"></i>
                         <p>Quantity Adjustment</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="<?= BASE_URL; ?>dashboard/inventory/adjustments"
                         class="nav-link <?= segment(3) === 'adjustments' || segment(3) === 'filter_adjustments' ? 'active' : '' ?>">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="fa fa-accessible-icon nav-icon"></i>
                         <p>Adjustments</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="<?= BASE_URL; ?>dashboard/inventory/count_stock"
                         class="nav-link <?= segment(3) === 'count_stock' ? 'active' : '' ?>">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="fa fa-braille nav-icon"></i>
                         <p>Count Stock</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="<?= BASE_URL; ?>dashboard/inventory/stock_count"
                         class="nav-link <?= segment(3) === 'stock_count' ? 'active' : '' ?>">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-file-alt nav-icon"></i>
                         <p>Stock Counts</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="<?= BASE_URL; ?>dashboard/inventory/stock_sheet"
+                        class="nav-link <?= segment(3) === 'stock_sheet' ? 'active' : '' ?>">
+                        <i class="far fa-file-excel nav-icon"></i>
+                        <p>Stock Sheet</p>
                     </a>
                 </li>
 
@@ -121,6 +129,12 @@
                     <a href="<?= BASE_URL; ?>dashboard/sales/list" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>List Sales</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= BASE_URL; ?>dashboard/sales/returnsale" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Return Sales</p>
                     </a>
                 </li>
                 <li class="nav-item">

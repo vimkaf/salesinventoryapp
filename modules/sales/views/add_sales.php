@@ -66,15 +66,21 @@
                                                     <i class="fas fa-plus-square"></i>
                                                     New Item
                                                 </button>
-                                                <button data-toggle="modal" data-target="#discountModal" type="button"
-                                                    class="btn btn-sm btn-outline-dark">
-                                                    <i class="fas fa-percent"></i>
-                                                    Apply Discount
-                                                </button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary ">
-                                                    <i class="far fa-pause-circle"></i>
-                                                    Hold Sale
-                                                </button>
+
+                                                <?php if (DISCOUNT): ?>
+                                                    <button data-toggle="modal" data-target="#discountModal" type="button"
+                                                        class="btn btn-sm btn-outline-dark">
+                                                        <i class="fas fa-percent"></i>
+                                                        Apply Discount
+                                                    </button>
+                                                <?php endif; ?>
+
+                                                <?php if (HOLD_SALE): ?>
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary ">
+                                                        <i class="far fa-pause-circle"></i>
+                                                        Hold Sale
+                                                    </button>
+                                                <?php endif; ?>
                                             </div>
 
                                         </th>
@@ -176,7 +182,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">&#8358;</span>
                                 </div>
-                                <input required class="form-control currency-mask" type="text" inputmode="decimal"
+                                <input required <?= TENDER_MODE === 'auto' ? 'readonly' : '' ?>
+                                    class="form-control currency-mask" type="text" inputmode="decimal" id="amount_paid"
                                     name="amount_paid">
                             </div>
                         </div>
@@ -184,9 +191,10 @@
                             <label for="">Method *</label>
                             <div class="input-group">
                                 <select name="method" class="form-control" required>
-                                    <option value="cash">Cash</option>
-                                    <option value="transfer">Bank Transfer</option>
-                                    <option value="card">CARD</option>
+                                    <?php $paymentMethods = explode(",", setting('payment_methods')); ?>
+                                    <?php foreach ($paymentMethods as $method): ?>
+                                        <option value="<?= strtolower($method) ?>"><?= strtoupper($method) ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>

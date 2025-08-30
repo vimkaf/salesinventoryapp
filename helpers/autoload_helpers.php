@@ -2,7 +2,8 @@
 
 $files = [
     'url_helper',
-    'flashdata_helper'
+    'flashdata_helper',
+    'setting_helper'
 ];
 
 

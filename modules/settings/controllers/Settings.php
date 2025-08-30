@@ -1,7 +1,7 @@
 <?php
 class Settings extends Trongate
 {
-    function site_settings()
+    public function site_settings()
     {
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -12,37 +12,36 @@ class Settings extends Trongate
             $this->_save_site_settings();
         }
 
-
     }
 
-    function _show_site_settings()
+    public function _show_site_settings()
     {
 
-        $data['settings'] = $this->model->query("SELECT * FROM settings", 'object');
+        $settings = $this->model->query("SELECT * FROM settings", 'object');
+        $siteSettings = new stdClass;
 
+        foreach ($settings as $setting) {
+            $settingName = $setting->setting_name;
+            $siteSettings->$settingName = $setting->setting_value;
+        }
+
+        $data['settings'] = $siteSettings;
         $data['view_module'] = "settings";
         $data['view_file'] = "site_settings";
-        $data['page_title'] = 'Site Settings';
-
+        $data['page_title'] = 'Settings';
 
         $this->template('dashboard', $data);
     }
 
-    function _save_site_settings()
+    public function _save_site_settings()
     {
 
         $postData = $_POST;
-
         $data = [];
 
         foreach ($postData as $key => $val) {
-
             $query = "UPDATE settings SET setting_value = :val WHERE setting_name = :key";
-
-
             $this->model->query_bind($query, ['val' => $val, 'key' => $key]);
-
-
         }
 
         set_flashdata([
@@ -51,7 +50,5 @@ class Settings extends Trongate
         ]);
 
         redirect('dashboard/settings/site');
-
-
     }
 }
